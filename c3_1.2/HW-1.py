@@ -1,5 +1,5 @@
-from sklearn import datasets
-from sklearn import svm
+from sklearn import datasets,svm
+import matplotlib.pyplot as plt
 
 d=datasets.load_iris()
 print(d.DESCR)
