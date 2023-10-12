@@ -10,7 +10,7 @@ x_train=mnist.data[:60000]; x_test=mnist.data[60000:]
 y_train=np.int16(mnist.target[:60000]); y_test=np.int16(mnist.target[60000:])
 
 
-mlp=MLPClassifier(hidden_layer_sizes=(100),learning_rate_init=0.001,batch_size=512,max_iter=300,solver='adam',verbose=True)
+mlp=MLPClassifier(hidden_layer_sizes=(200),learning_rate_init=0.001,batch_size=512,max_iter=300,solver='adam',verbose=True)
 mlp.fit(x_train,y_train)
 
 
@@ -27,3 +27,4 @@ for i in range(10):
     no_correct+=conf[i][i]
 accuracy=no_correct/len(res)
 print("테스트 집합에 대한 정확률은", accuracy*100, "%입니다.")
+

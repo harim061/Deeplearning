@@ -4,18 +4,23 @@ from sklearn.model_selection import train_test_split,validation_curve
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+from sklearn.datasets import fetch_openml
 
 
-digit=datasets.load_digits()
-x_train,y_train,x_test,y_test=train_test_split(digit.data,digit.target,train_size=0.6)
+mnist=fetch_openml('mnist_784')
+mnist.data=mnist.data/255.0
+x_train=mnist.data[:60000]; x_test=mnist.data[60000:]
+y_train=np.int16(mnist.target[:60000]); y_test=np.int16(mnist.target[60000:])
+
 
 start=time.time()
-mlp=MLPClassifier(learning_rate=0.001,batch_size=32,max_iter=300,solver='sgd')
+mlp=MLPClassifier(learning_rate_init=0.001,batch_size=32,max_iter=300,solver='sgd')
 prange=range(50,1001,50)
-train_score,test_score=validation_curve(mlp,x_train,y_train,param_name='hidden_layer_sizes',param_range=prange,cv=10,scoring='accuracy',n_jobs=4)
-
+train_score,test_score=validation_curve(mlp,x_train,y_train,param_name="hidden_layer_sizes",param_range=prange,cv=10,scoring="accuracy",n_jobs=4)
 end=time.time()
-print("하이퍼 매개변수 최적화에 걸린 시간은", end-start,"초입니다.")
+print("하이퍼 매개변수 최적화에 걸린 시간은",end-start,"초입니다.")
+
+
 
 train_mean= np.mean(train_score,axis=1)
 train_std=np.std(train_score,axis=1)
@@ -53,5 +58,3 @@ no_correct=0
 for i in range(10):
     no_correct+=conf[i][i]
 accuracy=no_correct/len(res)
-
-print("다층 퍼셉트론 : ",accuracy*100,"%")

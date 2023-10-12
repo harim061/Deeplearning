@@ -9,8 +9,8 @@ mnist.data=mnist.data/255.0
 x_train=mnist.data[:60000]; x_test=mnist.data[60000:]
 y_train=np.int16(mnist.target[:60000]); y_test=np.int16(mnist.target[60000:])
 
-
-mlp=MLPClassifier(hidden_layer_sizes=(100),learning_rate_init=0.001,batch_size=512,max_iter=300,solver='adam',verbose=True)
+# 은닉층을 2개로 사용
+mlp=MLPClassifier(hidden_layer_sizes=(100,50),learning_rate_init=0.001,batch_size=512,max_iter=300,solver='adam',verbose=True)
 mlp.fit(x_train,y_train)
 
 
