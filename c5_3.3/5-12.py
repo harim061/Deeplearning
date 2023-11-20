@@ -3,7 +3,8 @@ import tensorflow as tf
 from tensorflow.keras.datasets import fashion_mnist
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-from tensorflow.keras.optimizers import SGD,Adam,Adagrad,RMSprop
+from tensorflow.keras.optimizers import Adam,Adagrad,RMSprop
+from tensorflow.keras.optimizers.legacy import SGD
 from sklearn.model_selection import KFold
 
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
